@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'WANTED_PRE_ONBOARDING.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
