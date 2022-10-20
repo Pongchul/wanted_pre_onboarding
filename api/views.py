@@ -33,7 +33,7 @@ class PostViewSet(viewsets.ViewSet):
         serializer = serializers.PostSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def retrieve(self, request,pk=None):
+    def retrieve(self, request, pk=None):
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, pk=pk)
         serializer = serializers.PostRetrieveSerializer(post)
@@ -45,12 +45,14 @@ class PostViewSet(viewsets.ViewSet):
 
         serializer = serializers.PostUpdateSerializer(post, data=request.data)
         serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data)
 
     def destroy(self, request, pk=None):
         queryset = Post.objects.all()
-        jobPost = get_object_or_404(queryset, pk=pk)
-        jobPost.delete()
+        post = get_object_or_404(queryset, pk=pk)
+        post.delete()
+
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
