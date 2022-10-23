@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import User, Post, Company
+from api.models import User, Post, Company, Apply
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -47,3 +47,10 @@ class PostUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ['position','compensation','description','skill']
+
+
+class ApplySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Apply
+        fields = '__all__'
