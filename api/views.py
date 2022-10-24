@@ -37,6 +37,8 @@ class PostViewSet(viewsets.ViewSet):
         queryset = Post.objects.all()
         post = get_object_or_404(queryset, pk=pk)
         serializer = serializers.PostRetrieveSerializer(post)
+
+        companyNo = post.company.pk
         return Response(serializer.data)
 
     def update(self, request, pk=None):
