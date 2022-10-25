@@ -39,6 +39,7 @@ class PostViewSet(viewsets.ViewSet):
         serializer = serializers.PostRetrieveSerializer(post)
 
         companyNo = post.company.pk
+        anotherPosts = Post.objects.filter(company=companyNo).exclude(pk=pk).values_list('pk',flat=True)
         return Response(serializer.data)
 
     def update(self, request, pk=None):
