@@ -1,5 +1,6 @@
 from django.shortcuts import  get_object_or_404
 from rest_framework import viewsets, status, filters
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from api import serializers
@@ -40,6 +41,8 @@ class PostViewSet(viewsets.ViewSet):
 
         companyNo = post.company.pk
         anotherPosts = Post.objects.filter(company=companyNo).exclude(pk=pk).values_list('pk',flat=True)
+
+        json = JSONRenderer().render(serializer.data)
         return Response(serializer.data)
 
     def update(self, request, pk=None):
