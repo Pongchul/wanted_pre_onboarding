@@ -1,3 +1,5 @@
+import io
+
 from django.shortcuts import  get_object_or_404
 from rest_framework import viewsets, status, filters
 from rest_framework.renderers import JSONRenderer
@@ -43,6 +45,8 @@ class PostViewSet(viewsets.ViewSet):
         anotherPosts = Post.objects.filter(company=companyNo).exclude(pk=pk).values_list('pk',flat=True)
 
         json = JSONRenderer().render(serializer.data)
+
+        stream = io.BytesIO(json)
         return Response(serializer.data)
 
     def update(self, request, pk=None):
