@@ -49,6 +49,9 @@ class PostViewSet(viewsets.ViewSet):
 
         stream = io.BytesIO(json)
         data = JSONParser().parse(stream)
+
+        data["anthoerPosts"] = anotherPosts
+
         return Response(serializer.data)
 
     def update(self, request, pk=None):
