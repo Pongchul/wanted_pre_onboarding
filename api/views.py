@@ -2,6 +2,7 @@ import io
 
 from django.shortcuts import  get_object_or_404
 from rest_framework import viewsets, status, filters
+from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
@@ -47,6 +48,7 @@ class PostViewSet(viewsets.ViewSet):
         json = JSONRenderer().render(serializer.data)
 
         stream = io.BytesIO(json)
+        data = JSONParser().parse(stream)
         return Response(serializer.data)
 
     def update(self, request, pk=None):
